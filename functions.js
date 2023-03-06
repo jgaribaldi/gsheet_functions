@@ -1,4 +1,6 @@
-const {errorMessage, multiplyArrayByConstant, multiplyArrays, toArrayOfNumbers} = require("./helper");
+const {errorMessage, toArrayOfNumbers, singleWeightSingleSetsSingleReps, multipleWeightsSingleSetsSingleReps,
+    singleWeightSingleSetsMultipleReps, multipleWeightsMultipleReps
+} = require("./helper");
 
 /**
  * Calculates de total weight for a given amounts of sets, reps and weights.
@@ -22,16 +24,14 @@ function totalWeightFor(weight, sets, reps) {
         throw new Error(errorMessage(weightValues, repsValues));
     }
 
-    if (weightValues.length > 1 || repsValues.length > 1) {
-        if (weightValues.length === 1) { // single weight for all reps
-            return multiplyArrayByConstant(repsValues, weightValues[0]);
-        } else if (repsValues.length === 1) { // single rep amount for all weights
-            return multiplyArrayByConstant(weightValues, repsValues[0]);
-        } else {
-            return multiplyArrays(weightValues, repsValues);
-        }
+    if (weightValues.length === 1 && setsValues.length === 1 && repsValues.length === 1) {
+        return singleWeightSingleSetsSingleReps(weightValues, setsValues, repsValues);
+    } else if (weightValues.length > 1 && setsValues.length === 1 && repsValues.length === 1) {
+        return multipleWeightsSingleSetsSingleReps(weightValues, setsValues, repsValues);
+    } else if (weightValues.length === 1 && setsValues.length === 1 && repsValues.length > 1) {
+        return singleWeightSingleSetsMultipleReps(weightValues, setsValues, repsValues);
     } else {
-        return weightValues[0] * setsValues[0] * repsValues[0]
+        return multipleWeightsMultipleReps(weightValues, repsValues);
     }
 }
 

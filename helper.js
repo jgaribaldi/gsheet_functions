@@ -20,7 +20,7 @@ function toArrayOfNumbers(input) {
         let trimmedValuesParts = trimmedValues.split('/');
         let result = [];
 
-        for (let i = 0; i<multiplier; i++ ){
+        for (let i = 0; i < multiplier; i++) {
             result = result.concat(trimmedValuesParts);
         }
 
@@ -51,4 +51,31 @@ function errorMessage(weights, reps) {
     return "I've got " + weights.length + " weights and " + reps.length + " reps!";
 }
 
-module.exports = { errorMessage, multiplyArrays, multiplyArrayByConstant, toArrayOfNumbers };
+function singleWeightSingleSetsSingleReps(weights, sets, reps) {
+    return weights[0] * sets[0] * reps[0];
+}
+
+function singleWeightSingleSetsMultipleReps(weights, sets, reps) {
+    if (sets > reps.length) {
+        return multiplyArrayByConstant(reps, sets[0] * weights[0]);
+    } else {
+        return multiplyArrayByConstant(reps, weights[0]);
+    }
+}
+
+function multipleWeightsSingleSetsSingleReps(weights, sets, reps) {
+    return multiplyArrayByConstant(weights, reps[0]);
+}
+
+function multipleWeightsMultipleReps(weights, reps) {
+    return multiplyArrays(weights, reps);
+}
+
+module.exports = {
+    errorMessage,
+    toArrayOfNumbers,
+    singleWeightSingleSetsSingleReps,
+    singleWeightSingleSetsMultipleReps,
+    multipleWeightsSingleSetsSingleReps,
+    multipleWeightsMultipleReps
+};

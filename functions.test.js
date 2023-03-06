@@ -64,3 +64,10 @@ test("should return zero if all parameters are empty", () => {
     let reps = "";
     expect(totalWeightFor(weight, sets, reps)).toStrictEqual(0);
 })
+
+test("should return total weight for two sets of reps", () => {
+    let weight = "10";
+    let sets = "4";
+    let reps = "8/8";
+    expect(totalWeightFor(weight, sets, reps)).toStrictEqual(640);
+})
