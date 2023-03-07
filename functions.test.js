@@ -71,3 +71,17 @@ test("should return total weight for two sets of reps", () => {
     let reps = "8/8";
     expect(totalWeightFor(weight, sets, reps)).toStrictEqual(640);
 })
+
+test("should multiply single valued reps and multiple sets with comma input", () => {
+    let weight = "20,5/25/20,5/25";
+    let sets = "5";
+    let reps = "10";
+    expect(totalWeightFor(weight, sets, reps)).toStrictEqual(910);
+});
+
+test("should return zero for empty reps with comma input and multiplier", () => {
+    let weight = "(20/22,5/25) x 3";
+    let sets = "6";
+    let reps = "";
+    expect(totalWeightFor(weight, sets, reps)).toStrictEqual(0);
+})
