@@ -16,7 +16,7 @@ function toArrayOfNumbers(input) {
     if (hasMultiplier(input)) {
         let multiplier = getMultiplier(input);
         let values = getActualValues(input);
-        let trimmedValues = values.replace(/^\(+/, '').replace(/\)+$/, '').replaceAll(",", ".");
+        let trimmedValues = values.replace("(", "").replace(")", "").replaceAll(",", ".");
         let trimmedValuesParts = trimmedValues.split('/');
         let result = [];
 
@@ -28,7 +28,7 @@ function toArrayOfNumbers(input) {
             return Number(element);
         });
     } else {
-        let trimmedInput = input.replace(/^\(+/, '').replace(/\)+$/, '').replaceAll(",", ".");
+        let trimmedInput = input.replaceAll("(", "").replaceAll(")", "").replaceAll(",", ".");
         return trimmedInput.split('/').map(function (element) {
             return Number(element);
         });
