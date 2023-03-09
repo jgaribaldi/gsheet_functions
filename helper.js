@@ -16,7 +16,7 @@ function toArrayOfNumbers(input) {
     if (hasMultiplier(input)) {
         let multiplier = getMultiplier(input);
         let values = getActualValues(input);
-        let trimmedValues = values.replace("(", "").replace(")", "").replaceAll(",", ".");
+        let trimmedValues = values.replaceAll("(", "").replaceAll(")", "").replaceAll(",", ".");
         let trimmedValuesParts = trimmedValues.split('/');
         let result = [];
 
